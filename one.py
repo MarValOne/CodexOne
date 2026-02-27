@@ -1,5 +1,4 @@
 one
-one
 #!/usr/bin/env python3
 """Production-ready web title scraper.
 
@@ -10,6 +9,12 @@ and outputs cleaned text values. It includes:
 - Structured logging
 - JSON or text output formats
 - Optional output file writing
+
+Environment setup (recommended):
+    python3 -m venv .venv
+    source .venv/bin/activate
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements.txt
 
 Example:
     python one.py --url https://example.com --selector h1 --format json
@@ -157,7 +162,10 @@ def write_output(content: str, output_path: Path | None) -> None:
 
 def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     """Parse command-line arguments."""
-    parser = argparse.ArgumentParser(description="Production-grade web element text scraper")
+    parser = argparse.ArgumentParser(
+        description="Production-grade web element text scraper",
+        epilog="Tip: create a virtual environment and install requirements.txt before running.",
+    )
     parser.add_argument("--url", required=True, help="Target URL (must start with http:// or https://)")
     parser.add_argument("--selector", default=DEFAULT_SELECTOR, help="CSS selector to extract (default: h2)")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help="Request timeout in seconds")
